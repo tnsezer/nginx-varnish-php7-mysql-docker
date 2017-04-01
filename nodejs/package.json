@@ -1,0 +1,25 @@
+{
+  "name": "test_api",
+  "version": "1.0.0",
+  "description": "Trade made easy Application",
+  "main": "index.js",
+  "scripts": {    
+     "build": "babel -w src/ -d build/ -s inline",
+    "deploy" : "node_modules/babel-cli/bin/babel.js src/ -d build/",
+  },
+  "devDependencies": {   
+    "nodemon": "^1.9.2"
+  },
+  "dependencies": {    
+    "babel-cli": "*",
+	"babel-core": "*",
+    "babel-preset-es2016": "*",
+	"babel-preset-env": "*",
+	"redux": "*",
+	"react": "*",
+	"react-dom": "*"
+	"express": "*",
+	"socket.io": "*",
+	"engine.io": "*"
+  }
+}

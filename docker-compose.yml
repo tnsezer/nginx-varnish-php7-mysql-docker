@@ -1,0 +1,91 @@
+version: '2'
+
+services:
+    nginx:
+        build: ./nginx
+        ports:
+            - "8080:80"
+            - "444:443"
+        volumes:
+            - /home:/home
+            - /etc/nginx:/etc/nginx
+            - /var/log/nginx:/var/log/nginx
+        links:
+            - php7
+        expose:
+            - "8080"
+            
+    varnish:
+        build: ./varnish
+        ports:
+            - "80:80"
+        volumes:
+            - /etc/varnish:/etc/varnish
+        links:
+            - nginx
+            
+    php7:
+        build: ./php7
+        ports:
+            - "9000:9000"
+        volumes:
+            - /home:/home
+            - /etc/php.ini:/etc/php.ini
+            - /etc/php.d:/etc/php.d
+            - /etc/php-fpm.d:/etc/php-fpm.d
+        links:
+            - mysql5
+            - mysql8
+            - mongo
+        expose:
+            - "9000"
+            
+    mysql5:
+        image: mysql:5.7
+        ports:
+            - "3306:3306"
+        volumes:
+            - /var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=tan123123
+            - MYSQL_DATABASE=test
+        expose:
+            - "3306"
+            
+    mysql8:
+        image: mysql:8
+        ports:
+            - "3308:3306"
+        volumes:
+            - /var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=tan123123
+            - MYSQL_DATABASE=test
+        expose:
+            - "3308"
+
+    redis:
+        image: redis:latest
+        ports:
+            - "6379:6379"
+        expose:
+            - "6379"
+            
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        expose:
+            - "27017"
+            
+    nodejs:
+        build: ./nodejs
+        ports:
+            - "3001:3001"
+        volumes:
+            - /usr/src/app:/usr/src/app
+        expose:
+            - "3001"
+volumes:
+    db-data:
+        driver: local
