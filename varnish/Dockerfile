@@ -40,7 +40,7 @@ ENV VARNISH_PORT 80
 ENV VARNISH_BACKEND_PORT 8080
 ENV VARNISH_MEMORY 3G
 
-COPY ./default.vcl /etc/varnish/default.vcl
+COPY ./conf/default.vcl /etc/varnish/default.vcl
 
 CMD exec varnishd -j unix,user=varnishd -F -f /etc/varnish/default.vcl  -s malloc,$VARNISH_MEMORY -a 0.0.0.0:$VARNISH_PORT
 
