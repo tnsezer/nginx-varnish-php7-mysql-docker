@@ -1,25 +1,34 @@
 {
-  "name": "test_api",
+  "name": "minimal-react-webpack-babel-setup",
   "version": "1.0.0",
-  "description": "Trade made easy Application",
+  "description": "The Minimal React Webpack Babel Setup",
   "main": "index.js",
-  "scripts": {    
-     "build": "babel -w src/ -d build/ -s inline",
-    "deploy" : "node_modules/babel-cli/bin/babel.js src/ -d build/",
+  "scripts": {
+    "start": "webpack-dev-server --host 0.0.0.0 --port 3001 --progress --colors --hot --config ./webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {   
-    "nodemon": "^1.9.2"
+  "keywords": [],
+  "author": "Tan SEZER",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-2"
+    ]
   },
-  "dependencies": {    
-    "babel-cli": "*",
-	"babel-core": "*",
-    "babel-preset-es2016": "*",
-	"babel-preset-env": "*",
-	"redux": "*",
-	"react": "*",
-	"react-dom": "*"
-	"express": "*",
-	"socket.io": "*",
-	"engine.io": "*"
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "react-hot-loader": "^1.3.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }

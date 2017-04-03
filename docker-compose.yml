@@ -12,6 +12,8 @@ services:
             - /var/log/nginx:/var/log/nginx
         links:
             - php7
+            - elasticsearch
+            - memcached
         expose:
             - "8080"
             
@@ -39,6 +41,16 @@ services:
             - mongo
         expose:
             - "9000"
+    
+    elasticsearch:
+        image: elasticsearch
+        ports:
+            - "9200:9200"
+    
+    memcached:
+        image: memcached
+        ports:
+            - "11211:11211"
             
     mysql5:
         image: mysql:5.7
@@ -81,11 +93,16 @@ services:
     nodejs:
         build: ./nodejs
         ports:
+            - "2052:3000"
             - "3001:3001"
         volumes:
-            - /usr/src/app:/usr/src/app
+            - "./app:/src/app"
         expose:
-            - "3001"
+            - "2052"
+        links:
+            - mongo
+            - redis
+
 volumes:
     db-data:
         driver: local
